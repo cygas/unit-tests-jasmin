@@ -98,6 +98,20 @@ describe('simple-calc.js', function() {
                 expect(() => this.calculator.divide(0)).toThrowError(Error);
                 expect(() => this.calculator.divide(0)).toThrowError(Error, 'cannot divide by zero');
             });
-        });        
+        });
+        
+        describe('get version', function() {
+            it('fetches version from external source', function(done) {
+                spyOn(window, 'fetch').and.returnValue(Promise.resolve(
+                    new Response('{ "version": "0.1" }')
+                ));
+
+                this.calculator.version.then(function(version) {
+                    expect(version).toBe('0.1');
+
+                    done();
+                });
+            });
+        });
     });
 });

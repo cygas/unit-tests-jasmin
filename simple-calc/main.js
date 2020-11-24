@@ -41,3 +41,11 @@ function updateResult(result) {
         el.innerText = result;
     }
 }
+
+function showVersion() {
+    const calculator = new Calculator();
+    const el = document.getElementById('version');
+
+    calculator.version
+        .then(version => el.innerText = version);
+}
